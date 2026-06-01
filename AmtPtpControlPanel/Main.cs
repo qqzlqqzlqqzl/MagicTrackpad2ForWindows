@@ -30,7 +30,7 @@ namespace AmtPtpControlPanel
         {
             try
             {
-                Process.Start("ms-settings:devices-touchpad");
+                Process.Start(new ProcessStartInfo("ms-settings:devices-touchpad") { UseShellExecute = true });
             }
             catch
             {
@@ -89,7 +89,7 @@ namespace AmtPtpControlPanel
             {
                 ctlBatteryProgressBar.DisplayType = ProgressBarWithPercentage.TextDisplayType.Percent;
                 ctlBatteryProgressBar.Value = (int)level;
-                ctlBatteryGroupBox.Text = "Battery (only Bluetooth): --- LAST UPDATED: " + DateTime.Now.ToString();
+                ctlBatteryGroupBox.Text = "电量（仅蓝牙）: --- 上次更新: " + DateTime.Now.ToString();
             }
         }
 
@@ -228,7 +228,7 @@ namespace AmtPtpControlPanel
 
                 if (!Int32.TryParse(ctlStopPressureValue.Text, out stopPressure) || stopPressure < 0)
                 {
-                    MessageBox.Show("Pressure must be greater than or equal to 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("压力必须大于或等于 0。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -238,7 +238,7 @@ namespace AmtPtpControlPanel
 
                 if (!Int32.TryParse(ctlStopSizeValue.Text, out stopSize) || stopSize < 0)
                 {
-                    MessageBox.Show("Size must be greater than or equal to 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("大小必须大于或等于 0。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -271,7 +271,7 @@ namespace AmtPtpControlPanel
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error writing to the registry: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("写入注册表时出错: " + ex.ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -650,7 +650,7 @@ namespace AmtPtpControlPanel
                 {
                     if (showMessageBox)
                     {
-                        MessageBox.Show($"Failed to open device. Error: {Marshal.GetLastWin32Error()}");
+                        MessageBox.Show($"无法打开设备。错误: {Marshal.GetLastWin32Error()}");
                     }
                     return false;
                 }
@@ -680,7 +680,7 @@ namespace AmtPtpControlPanel
 
                 if (!success && showMessageBox)
                 {
-                    MessageBox.Show($"DeviceIoControl failed. Error: {Marshal.GetLastWin32Error()}");
+                    MessageBox.Show($"DeviceIoControl 调用失败。错误: {Marshal.GetLastWin32Error()}");
                 }
 
                 return success;

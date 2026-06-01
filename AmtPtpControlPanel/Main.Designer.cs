@@ -72,7 +72,7 @@ namespace AmtPtpControlPanel
             this.ctlTouchpadSettings.Name = "ctlTouchpadSettings";
             this.ctlTouchpadSettings.Size = new System.Drawing.Size(242, 33);
             this.ctlTouchpadSettings.TabIndex = 5;
-            this.ctlTouchpadSettings.Text = "Windows Touchpad Settings";
+            this.ctlTouchpadSettings.Text = "Windows 触摸板设置";
             this.ctlTouchpadSettings.UseVisualStyleBackColor = true;
             this.ctlTouchpadSettings.Click += new System.EventHandler(this.ctlTouchpadSettings_Click);
             // 
@@ -82,7 +82,7 @@ namespace AmtPtpControlPanel
             this.ctlApply.Name = "ctlApply";
             this.ctlApply.Size = new System.Drawing.Size(195, 33);
             this.ctlApply.TabIndex = 0;
-            this.ctlApply.Text = "Apply";
+            this.ctlApply.Text = "应用";
             this.ctlApply.UseVisualStyleBackColor = true;
             this.ctlApply.Click += new System.EventHandler(this.ctlApply_Click);
             // 
@@ -102,7 +102,7 @@ namespace AmtPtpControlPanel
             this.ctlLightLabel.Name = "ctlLightLabel";
             this.ctlLightLabel.Size = new System.Drawing.Size(35, 16);
             this.ctlLightLabel.TabIndex = 3;
-            this.ctlLightLabel.Text = "Light";
+            this.ctlLightLabel.Text = "轻";
             // 
             // ctlMediumLabel
             // 
@@ -111,7 +111,7 @@ namespace AmtPtpControlPanel
             this.ctlMediumLabel.Name = "ctlMediumLabel";
             this.ctlMediumLabel.Size = new System.Drawing.Size(55, 16);
             this.ctlMediumLabel.TabIndex = 4;
-            this.ctlMediumLabel.Text = "Medium";
+            this.ctlMediumLabel.Text = "中";
             // 
             // ctlFirmLabel
             // 
@@ -120,7 +120,7 @@ namespace AmtPtpControlPanel
             this.ctlFirmLabel.Name = "ctlFirmLabel";
             this.ctlFirmLabel.Size = new System.Drawing.Size(33, 16);
             this.ctlFirmLabel.TabIndex = 5;
-            this.ctlFirmLabel.Text = "Firm";
+            this.ctlFirmLabel.Text = "重";
             // 
             // ctlSilentClicking
             // 
@@ -129,7 +129,7 @@ namespace AmtPtpControlPanel
             this.ctlSilentClicking.Name = "ctlSilentClicking";
             this.ctlSilentClicking.Size = new System.Drawing.Size(110, 20);
             this.ctlSilentClicking.TabIndex = 1;
-            this.ctlSilentClicking.Text = "Silent clicking";
+            this.ctlSilentClicking.Text = "静音点击";
             this.ctlSilentClicking.UseVisualStyleBackColor = true;
             // 
             // ctlMacOSClickOptions
@@ -140,7 +140,7 @@ namespace AmtPtpControlPanel
             this.ctlMacOSClickOptions.Size = new System.Drawing.Size(185, 20);
             this.ctlMacOSClickOptions.TabIndex = 0;
             this.ctlMacOSClickOptions.TabStop = true;
-            this.ctlMacOSClickOptions.Text = "Use macOS Click Options:";
+            this.ctlMacOSClickOptions.Text = "使用 macOS 点击选项:";
             this.ctlMacOSClickOptions.UseVisualStyleBackColor = true;
             this.ctlMacOSClickOptions.CheckedChanged += new System.EventHandler(this.ctlClickOptions_CheckedChanged);
             // 
@@ -167,7 +167,7 @@ namespace AmtPtpControlPanel
             this.groupBox2.Size = new System.Drawing.Size(445, 194);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Click Options NOT available in macOS:";
+            this.groupBox2.Text = "macOS 中没有的点击选项:";
             // 
             // ctlMaximumFeedback
             // 
@@ -177,7 +177,7 @@ namespace AmtPtpControlPanel
             this.ctlMaximumFeedback.Size = new System.Drawing.Size(316, 20);
             this.ctlMaximumFeedback.TabIndex = 1;
             this.ctlMaximumFeedback.TabStop = true;
-            this.ctlMaximumFeedback.Text = "Maximum haptic feedback (very clicky and loud!)";
+            this.ctlMaximumFeedback.Text = "最大触觉反馈（点击感最强，声音较大）";
             this.ctlMaximumFeedback.UseVisualStyleBackColor = true;
             this.ctlMaximumFeedback.CheckedChanged += new System.EventHandler(this.ctlClickOptions_CheckedChanged);
             // 
@@ -189,7 +189,7 @@ namespace AmtPtpControlPanel
             this.ctlDisableFeedback.Size = new System.Drawing.Size(376, 20);
             this.ctlDisableFeedback.TabIndex = 0;
             this.ctlDisableFeedback.TabStop = true;
-            this.ctlDisableFeedback.Text = "Disable haptic feedback and force touch button completely";
+            this.ctlDisableFeedback.Text = "完全禁用触觉反馈和力度触控按钮";
             this.ctlDisableFeedback.UseVisualStyleBackColor = true;
             this.ctlDisableFeedback.CheckedChanged += new System.EventHandler(this.ctlClickOptions_CheckedChanged);
             // 
@@ -215,7 +215,7 @@ namespace AmtPtpControlPanel
             this.groupBox3.Size = new System.Drawing.Size(791, 147);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "When you lift your finger from the trackpad:";
+            this.groupBox3.Text = "手指离开触控板时:";
             // 
             // ctlStopSizeLabel
             // 
@@ -224,7 +224,7 @@ namespace AmtPtpControlPanel
             this.ctlStopSizeLabel.Name = "ctlStopSizeLabel";
             this.ctlStopSizeLabel.Size = new System.Drawing.Size(150, 16);
             this.ctlStopSizeLabel.TabIndex = 6;
-            this.ctlStopSizeLabel.Text = "units. (7 is a good value)";
+            this.ctlStopSizeLabel.Text = "单位。（推荐值: 7）";
             this.ctlStopSizeLabel.Click += new System.EventHandler(this.ctlStop_Click);
             // 
             // ctlStopSizeValue
@@ -243,7 +243,7 @@ namespace AmtPtpControlPanel
             this.ctlStopPressureLabel.Name = "ctlStopPressureLabel";
             this.ctlStopPressureLabel.Size = new System.Drawing.Size(281, 16);
             this.ctlStopPressureLabel.TabIndex = 3;
-            this.ctlStopPressureLabel.Text = "units. (0 means no pressure; 0 is a good value)";
+            this.ctlStopPressureLabel.Text = "单位。（0 表示无压力，推荐值: 0）";
             this.ctlStopPressureLabel.Click += new System.EventHandler(this.ctlStop_Click);
             // 
             // ctlStopPressureValue
@@ -263,7 +263,7 @@ namespace AmtPtpControlPanel
             this.ctlStopSize.Size = new System.Drawing.Size(414, 20);
             this.ctlStopSize.TabIndex = 4;
             this.ctlStopSize.TabStop = true;
-            this.ctlStopSize.Text = "Stop the pointer if the size of the touch area is less than or equal to";
+            this.ctlStopSize.Text = "触摸面积小于或等于此值时停止指针";
             this.ctlStopSize.UseVisualStyleBackColor = true;
             this.ctlStopSize.CheckedChanged += new System.EventHandler(this.ctlStop_CheckedChanged);
             // 
@@ -275,7 +275,7 @@ namespace AmtPtpControlPanel
             this.ctlStopPressure.Size = new System.Drawing.Size(342, 20);
             this.ctlStopPressure.TabIndex = 1;
             this.ctlStopPressure.TabStop = true;
-            this.ctlStopPressure.Text = "Stop the pointer if the pressure is less than or equal to";
+            this.ctlStopPressure.Text = "压力小于或等于此值时停止指针";
             this.ctlStopPressure.UseVisualStyleBackColor = true;
             this.ctlStopPressure.CheckedChanged += new System.EventHandler(this.ctlStop_CheckedChanged);
             // 
@@ -287,7 +287,7 @@ namespace AmtPtpControlPanel
             this.ctlStopDoNothing.Size = new System.Drawing.Size(92, 20);
             this.ctlStopDoNothing.TabIndex = 0;
             this.ctlStopDoNothing.TabStop = true;
-            this.ctlStopDoNothing.Text = "Do nothing";
+            this.ctlStopDoNothing.Text = "不执行任何操作";
             this.ctlStopDoNothing.UseVisualStyleBackColor = true;
             this.ctlStopDoNothing.CheckedChanged += new System.EventHandler(this.ctlStop_CheckedChanged);
             // 
@@ -301,7 +301,7 @@ namespace AmtPtpControlPanel
             this.groupBox4.Size = new System.Drawing.Size(791, 147);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Other options:";
+            this.groupBox4.Text = "其他选项:";
             // 
             // ctlPalmRejection
             // 
@@ -310,7 +310,7 @@ namespace AmtPtpControlPanel
             this.ctlPalmRejection.Name = "ctlPalmRejection";
             this.ctlPalmRejection.Size = new System.Drawing.Size(120, 20);
             this.ctlPalmRejection.TabIndex = 2;
-            this.ctlPalmRejection.Text = "Palm Rejection";
+            this.ctlPalmRejection.Text = "防误触";
             this.ctlPalmRejection.UseVisualStyleBackColor = true;
             // 
             // ctlIgnoreButtonFinger
@@ -319,9 +319,7 @@ namespace AmtPtpControlPanel
             this.ctlIgnoreButtonFinger.Name = "ctlIgnoreButtonFinger";
             this.ctlIgnoreButtonFinger.Size = new System.Drawing.Size(755, 41);
             this.ctlIgnoreButtonFinger.TabIndex = 1;
-            this.ctlIgnoreButtonFinger.Text = "Ignore input from the finger used to click the force touch button (useful for dra" +
-    "gging, if you use your thumb to click the button and your index finger to move t" +
-    "he pointer, for example)";
+            this.ctlIgnoreButtonFinger.Text = "忽略用于按下力度触控按钮的手指输入（例如用拇指点击、食指移动指针拖拽时很有用）";
             this.ctlIgnoreButtonFinger.UseVisualStyleBackColor = true;
             // 
             // ctlIgnoreNearFingers
@@ -331,7 +329,7 @@ namespace AmtPtpControlPanel
             this.ctlIgnoreNearFingers.Name = "ctlIgnoreNearFingers";
             this.ctlIgnoreNearFingers.Size = new System.Drawing.Size(368, 20);
             this.ctlIgnoreNearFingers.TabIndex = 0;
-            this.ctlIgnoreNearFingers.Text = "Ignore input from fingers not touching the trackpad surface";
+            this.ctlIgnoreNearFingers.Text = "忽略未接触触控板表面的手指输入";
             this.ctlIgnoreNearFingers.UseVisualStyleBackColor = true;
             // 
             // ctlBatteryProgressBar
@@ -353,7 +351,7 @@ namespace AmtPtpControlPanel
             this.ctlBatteryGroupBox.Size = new System.Drawing.Size(790, 75);
             this.ctlBatteryGroupBox.TabIndex = 13;
             this.ctlBatteryGroupBox.TabStop = false;
-            this.ctlBatteryGroupBox.Text = "Battery (only Bluetooth):";
+            this.ctlBatteryGroupBox.Text = "电量（仅蓝牙）:";
             // 
             // ctlBatteryUpdate
             // 
@@ -361,7 +359,7 @@ namespace AmtPtpControlPanel
             this.ctlBatteryUpdate.Name = "ctlBatteryUpdate";
             this.ctlBatteryUpdate.Size = new System.Drawing.Size(195, 33);
             this.ctlBatteryUpdate.TabIndex = 14;
-            this.ctlBatteryUpdate.Text = "Update Battery";
+            this.ctlBatteryUpdate.Text = "更新电量";
             this.ctlBatteryUpdate.UseVisualStyleBackColor = true;
             this.ctlBatteryUpdate.Click += new System.EventHandler(this.ctlBatteryUpdate_Click);
             // 
@@ -382,7 +380,7 @@ namespace AmtPtpControlPanel
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Main";
-            this.Text = "Magic Trackpad 2 Control Panel";
+            this.Text = "Magic Trackpad 2 控制面板";
             this.Load += new System.EventHandler(this.Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ctlFeedback)).EndInit();
             this.groupBox1.ResumeLayout(false);
