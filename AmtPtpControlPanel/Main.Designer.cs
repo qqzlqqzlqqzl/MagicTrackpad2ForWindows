@@ -43,6 +43,8 @@ namespace AmtPtpControlPanel
             this.ctlClickPressureThreshold = new System.Windows.Forms.CheckBox();
             this.ctlClickPressureThresholdValue = new System.Windows.Forms.TextBox();
             this.ctlClickPressureThresholdLabel = new System.Windows.Forms.Label();
+            this.ctlClickReleasePressureThresholdValue = new System.Windows.Forms.TextBox();
+            this.ctlClickReleasePressureThresholdLabel = new System.Windows.Forms.Label();
             this.ctlMaximumFeedback = new System.Windows.Forms.RadioButton();
             this.ctlDisableFeedback = new System.Windows.Forms.RadioButton();
             this.ctlFocusHack = new System.Windows.Forms.TextBox();
@@ -168,6 +170,8 @@ namespace AmtPtpControlPanel
             this.groupBox2.Controls.Add(this.ctlClickPressureThreshold);
             this.groupBox2.Controls.Add(this.ctlClickPressureThresholdValue);
             this.groupBox2.Controls.Add(this.ctlClickPressureThresholdLabel);
+            this.groupBox2.Controls.Add(this.ctlClickReleasePressureThresholdValue);
+            this.groupBox2.Controls.Add(this.ctlClickReleasePressureThresholdLabel);
             this.groupBox2.Location = new System.Drawing.Point(358, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(445, 194);
@@ -180,17 +184,17 @@ namespace AmtPtpControlPanel
             this.ctlClickPressureThreshold.AutoSize = true;
             this.ctlClickPressureThreshold.Location = new System.Drawing.Point(28, 135);
             this.ctlClickPressureThreshold.Name = "ctlClickPressureThreshold";
-            this.ctlClickPressureThreshold.Size = new System.Drawing.Size(222, 21);
+            this.ctlClickPressureThreshold.Size = new System.Drawing.Size(191, 21);
             this.ctlClickPressureThreshold.TabIndex = 2;
-            this.ctlClickPressureThreshold.Text = "实验：用压力阈值触发点击";
+            this.ctlClickPressureThreshold.Text = "实验：用压力触发点击";
             this.ctlClickPressureThreshold.UseVisualStyleBackColor = true;
             this.ctlClickPressureThreshold.CheckedChanged += new System.EventHandler(this.ctlClickPressureThreshold_CheckedChanged);
             //
             // ctlClickPressureThresholdValue
             //
-            this.ctlClickPressureThresholdValue.Location = new System.Drawing.Point(291, 133);
+            this.ctlClickPressureThresholdValue.Location = new System.Drawing.Point(283, 133);
             this.ctlClickPressureThresholdValue.Name = "ctlClickPressureThresholdValue";
-            this.ctlClickPressureThresholdValue.Size = new System.Drawing.Size(51, 23);
+            this.ctlClickPressureThresholdValue.Size = new System.Drawing.Size(38, 23);
             this.ctlClickPressureThresholdValue.TabIndex = 3;
             this.ctlClickPressureThresholdValue.Text = "128";
             this.ctlClickPressureThresholdValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -198,11 +202,29 @@ namespace AmtPtpControlPanel
             // ctlClickPressureThresholdLabel
             //
             this.ctlClickPressureThresholdLabel.AutoSize = true;
-            this.ctlClickPressureThresholdLabel.Location = new System.Drawing.Point(348, 136);
+            this.ctlClickPressureThresholdLabel.Location = new System.Drawing.Point(229, 136);
             this.ctlClickPressureThresholdLabel.Name = "ctlClickPressureThresholdLabel";
-            this.ctlClickPressureThresholdLabel.Size = new System.Drawing.Size(62, 17);
+            this.ctlClickPressureThresholdLabel.Size = new System.Drawing.Size(56, 17);
             this.ctlClickPressureThresholdLabel.TabIndex = 4;
-            this.ctlClickPressureThresholdLabel.Text = "阈值 0-255";
+            this.ctlClickPressureThresholdLabel.Text = "按下";
+            //
+            // ctlClickReleasePressureThresholdValue
+            //
+            this.ctlClickReleasePressureThresholdValue.Location = new System.Drawing.Point(391, 133);
+            this.ctlClickReleasePressureThresholdValue.Name = "ctlClickReleasePressureThresholdValue";
+            this.ctlClickReleasePressureThresholdValue.Size = new System.Drawing.Size(38, 23);
+            this.ctlClickReleasePressureThresholdValue.TabIndex = 5;
+            this.ctlClickReleasePressureThresholdValue.Text = "96";
+            this.ctlClickReleasePressureThresholdValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            //
+            // ctlClickReleasePressureThresholdLabel
+            //
+            this.ctlClickReleasePressureThresholdLabel.AutoSize = true;
+            this.ctlClickReleasePressureThresholdLabel.Location = new System.Drawing.Point(327, 136);
+            this.ctlClickReleasePressureThresholdLabel.Name = "ctlClickReleasePressureThresholdLabel";
+            this.ctlClickReleasePressureThresholdLabel.Size = new System.Drawing.Size(56, 17);
+            this.ctlClickReleasePressureThresholdLabel.TabIndex = 6;
+            this.ctlClickReleasePressureThresholdLabel.Text = "释放";
             //
             // ctlMaximumFeedback
             //
@@ -448,6 +470,8 @@ namespace AmtPtpControlPanel
         private System.Windows.Forms.CheckBox ctlClickPressureThreshold;
         private System.Windows.Forms.TextBox ctlClickPressureThresholdValue;
         private System.Windows.Forms.Label ctlClickPressureThresholdLabel;
+        private System.Windows.Forms.TextBox ctlClickReleasePressureThresholdValue;
+        private System.Windows.Forms.Label ctlClickReleasePressureThresholdLabel;
         private System.Windows.Forms.RadioButton ctlMaximumFeedback;
         private System.Windows.Forms.RadioButton ctlDisableFeedback;
         private System.Windows.Forms.TextBox ctlFocusHack;

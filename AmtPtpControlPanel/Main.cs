@@ -78,6 +78,8 @@ namespace AmtPtpControlPanel
         {
             ctlClickPressureThresholdValue.Enabled = ctlClickPressureThreshold.Checked;
             ctlClickPressureThresholdLabel.Enabled = ctlClickPressureThreshold.Checked;
+            ctlClickReleasePressureThresholdValue.Enabled = ctlClickPressureThreshold.Checked;
+            ctlClickReleasePressureThresholdLabel.Enabled = ctlClickPressureThreshold.Checked;
         }
 
         private void ctlStop_Click(object sender, EventArgs e)
@@ -113,6 +115,8 @@ namespace AmtPtpControlPanel
             Int32 feedbackClick = 0x060617;
             Int32 feedbackRelease = 0x000014;
             Int32 clickPressureThreshold = -1;
+            Int32 clickPressPressureThreshold = -1;
+            Int32 clickReleasePressureThreshold = -1;
             Int32 stopPressure = 0;
             Int32 stopSize = -1;
             Int32 ignoreButtonFinger = 1;
@@ -138,6 +142,8 @@ namespace AmtPtpControlPanel
                     get("FeedbackClick", ref feedbackClick);
                     get("FeedbackRelease", ref feedbackRelease);
                     get("ClickPressureThreshold", ref clickPressureThreshold);
+                    get("ClickPressPressureThreshold", ref clickPressPressureThreshold);
+                    get("ClickReleasePressureThreshold", ref clickReleasePressureThreshold);
                     get("StopPressure", ref stopPressure);
                     get("StopSize", ref stopSize);
                     get("IgnoreButtonFinger", ref ignoreButtonFinger);
@@ -188,10 +194,17 @@ namespace AmtPtpControlPanel
             if (palmRejection != 0)
                 ctlPalmRejection.Checked = true;
 
-            if (clickPressureThreshold != -1)
+            if (clickPressPressureThreshold == -1 && clickPressureThreshold != -1)
+                clickPressPressureThreshold = clickPressureThreshold;
+
+            if (clickReleasePressureThreshold == -1 && clickPressPressureThreshold != -1)
+                clickReleasePressureThreshold = clickPressPressureThreshold;
+
+            if (clickPressPressureThreshold != -1)
             {
                 ctlClickPressureThreshold.Checked = true;
-                ctlClickPressureThresholdValue.Text = clickPressureThreshold.ToString();
+                ctlClickPressureThresholdValue.Text = clickPressPressureThreshold.ToString();
+                ctlClickReleasePressureThresholdValue.Text = clickReleasePressureThreshold.ToString();
             }
             ctlClickPressureThreshold_CheckedChanged(ctlClickPressureThreshold, EventArgs.Empty);
         }
@@ -202,6 +215,8 @@ namespace AmtPtpControlPanel
             Int32 feedbackClick = 0x060617;
             Int32 feedbackRelease = 0x000014;
             Int32 clickPressureThreshold = -1;
+            Int32 clickPressPressureThreshold = -1;
+            Int32 clickReleasePressureThreshold = -1;
             Int32 stopPressure = 0;
             Int32 stopSize = -1;
             Int32 ignoreButtonFinger = 1;
@@ -261,13 +276,29 @@ namespace AmtPtpControlPanel
 
             if (ctlClickPressureThreshold.Checked)
             {
-                if (!Int32.TryParse(ctlClickPressureThresholdValue.Text, out clickPressureThreshold) ||
-                    clickPressureThreshold < 0 ||
-                    clickPressureThreshold > 255)
+                if (!Int32.TryParse(ctlClickPressureThresholdValue.Text, out clickPressPressureThreshold) ||
+                    clickPressPressureThreshold < 0 ||
+                    clickPressPressureThreshold > 255)
                 {
-                    MessageBox.Show("点击触发压力阈值必须是 0 到 255 之间的整数。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("点击按下压力阈值必须是 0 到 255 之间的整数。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
+
+                if (!Int32.TryParse(ctlClickReleasePressureThresholdValue.Text, out clickReleasePressureThreshold) ||
+                    clickReleasePressureThreshold < 0 ||
+                    clickReleasePressureThreshold > 255)
+                {
+                    MessageBox.Show("点击释放压力阈值必须是 0 到 255 之间的整数。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
+                if (clickReleasePressureThreshold > clickPressPressureThreshold)
+                {
+                    MessageBox.Show("点击释放压力阈值必须小于或等于按下压力阈值。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
+                clickPressureThreshold = clickPressPressureThreshold;
             }
 
             ignoreButtonFinger = ctlIgnoreButtonFinger.Checked ? 1 : 0;
@@ -286,6 +317,8 @@ namespace AmtPtpControlPanel
                         keyParameters.SetValue("FeedbackClick", feedbackClick);
                         keyParameters.SetValue("FeedbackRelease", feedbackRelease);
                         keyParameters.SetValue("ClickPressureThreshold", clickPressureThreshold);
+                        keyParameters.SetValue("ClickPressPressureThreshold", clickPressPressureThreshold);
+                        keyParameters.SetValue("ClickReleasePressureThreshold", clickReleasePressureThreshold);
                         keyParameters.SetValue("StopPressure", stopPressure);
                         keyParameters.SetValue("StopSize", stopSize);
                         keyParameters.SetValue("IgnoreButtonFinger", ignoreButtonFinger);

@@ -178,11 +178,25 @@ PtpFilterInputParseMT2Report(
 	if (raw_n >= PTP_MAX_CONTACT_POINTS) raw_n = PTP_MAX_CONTACT_POINTS;
 	ptpOutputReport.ContactCount = (UCHAR) raw_n;
 
-	if (driverContext->ClickPressureThreshold != 0xffffffff) {
+	ULONG clickPressPressureThreshold = driverContext->ClickPressPressureThreshold;
+	ULONG clickReleasePressureThreshold = driverContext->ClickReleasePressureThreshold;
+	if (clickPressPressureThreshold == 0xffffffff && driverContext->ClickPressureThreshold != 0xffffffff) {
+		clickPressPressureThreshold = driverContext->ClickPressureThreshold;
+		clickReleasePressureThreshold = driverContext->ClickPressureThreshold;
+	}
+	if (clickReleasePressureThreshold == 0xffffffff) {
+		clickReleasePressureThreshold = clickPressPressureThreshold;
+	}
+	if (clickReleasePressureThreshold > clickPressPressureThreshold) {
+		clickReleasePressureThreshold = clickPressPressureThreshold;
+	}
+
+	if (clickPressPressureThreshold != 0xffffffff) {
+		ULONG threshold = DeviceContext->PrevIsButtonClicked ? clickReleasePressureThreshold : clickPressPressureThreshold;
 		ptpOutputReport.IsButtonClicked = 0;
 		for (size_t i = 0; i < raw_n; i++) {
 			f = &mt_report->Fingers[i];
-			if ((f->State & 0x4) && f->Pressure >= driverContext->ClickPressureThreshold) {
+			if ((f->State & 0x4) && f->Pressure >= threshold) {
 				ptpOutputReport.IsButtonClicked = TRUE;
 				break;
 			}
