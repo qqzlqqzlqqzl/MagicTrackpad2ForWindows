@@ -89,7 +89,7 @@ namespace AmtPtpControlPanel
             {
                 ctlBatteryProgressBar.DisplayType = ProgressBarWithPercentage.TextDisplayType.Percent;
                 ctlBatteryProgressBar.Value = (int)level;
-                ctlBatteryGroupBox.Text = "Battery (only Bluetooth): --- LAST UPDATED: " + DateTime.Now.ToString();
+                ctlBatteryGroupBox.Text = "电池（仅蓝牙）：--- 最后更新：" + DateTime.Now.ToString();
             }
         }
 
@@ -228,7 +228,7 @@ namespace AmtPtpControlPanel
 
                 if (!Int32.TryParse(ctlStopPressureValue.Text, out stopPressure) || stopPressure < 0)
                 {
-                    MessageBox.Show("Pressure must be greater than or equal to 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("压力必须大于或等于 0。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -238,7 +238,7 @@ namespace AmtPtpControlPanel
 
                 if (!Int32.TryParse(ctlStopSizeValue.Text, out stopSize) || stopSize < 0)
                 {
-                    MessageBox.Show("Size must be greater than or equal to 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("触摸面积必须大于或等于 0。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -271,7 +271,7 @@ namespace AmtPtpControlPanel
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error writing to the registry: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("写入注册表时出错：" + ex.ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -286,13 +286,14 @@ namespace AmtPtpControlPanel
     public class ProgressBarWithPercentage : ProgressBar // from: https://cowthulu.com/winforms-progressbar-with-text/
     {
         public const int WM_PAINT = 0xF;
-        public const int WS_EX_COMPOSITED = 0x2000_000;
+        public const int WS_EX_COMPOSITED = 0x2000000;
 
         private TextDisplayType _style = TextDisplayType.Percent;
         private string _manualText = "";
 
         public ProgressBarWithPercentage()
         {
+            TextColor = Color.White;
         }
 
         [Category("Appearance")]
@@ -323,10 +324,14 @@ namespace AmtPtpControlPanel
 
         [Category("Appearance")]
         [Description("Color of text on bar.")]
-        public Color TextColor { get; set; } = Color.White;
+        public Color TextColor { get; set; }
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always)]
-        public override Font Font { get => base.Font; set => base.Font = value; }
+        public override Font Font
+        {
+            get { return base.Font; }
+            set { base.Font = value; }
+        }
 
         protected override CreateParams CreateParams
         {
@@ -620,7 +625,8 @@ namespace AmtPtpControlPanel
 
         public static bool SendIoctl(uint code, bool showMessageBox = false)
         {
-            return ExecuteIoctl(code, out _, false, showMessageBox);
+            uint unused;
+            return ExecuteIoctl(code, out unused, false, showMessageBox);
         }
 
         public static bool SendIoctl(uint code, out uint result, bool showMessageBox = false)
@@ -650,7 +656,7 @@ namespace AmtPtpControlPanel
                 {
                     if (showMessageBox)
                     {
-                        MessageBox.Show($"Failed to open device. Error: {Marshal.GetLastWin32Error()}");
+                        MessageBox.Show("打开设备失败。错误：" + Marshal.GetLastWin32Error());
                     }
                     return false;
                 }
@@ -662,6 +668,7 @@ namespace AmtPtpControlPanel
                     pOutBuffer = Marshal.AllocHGlobal((int)outBufferSize);
                 }
 
+                uint bytesReturned;
                 bool success = DeviceIoControl(
                     hDevice,
                     code,
@@ -669,7 +676,7 @@ namespace AmtPtpControlPanel
                     0,
                     pOutBuffer,
                     outBufferSize,
-                    out _,
+                    out bytesReturned,
                     IntPtr.Zero
                 );
 
@@ -680,7 +687,7 @@ namespace AmtPtpControlPanel
 
                 if (!success && showMessageBox)
                 {
-                    MessageBox.Show($"DeviceIoControl failed. Error: {Marshal.GetLastWin32Error()}");
+                    MessageBox.Show("DeviceIoControl 失败。错误：" + Marshal.GetLastWin32Error());
                 }
 
                 return success;
@@ -691,7 +698,10 @@ namespace AmtPtpControlPanel
                 {
                     Marshal.FreeHGlobal(pOutBuffer);
                 }
-                hDevice?.Dispose();
+                if (hDevice != null)
+                {
+                    hDevice.Dispose();
+                }
             }
         }
     }
