@@ -1,4 +1,10 @@
-on: workflow_dispatch
+name: Build Driver Package and Control Panel
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
