@@ -478,6 +478,7 @@ AmtPtpServiceTouchInputInterruptType5(
 		DeviceContext->PrevPtpReportAux1.Id = (UINT32)-1;
 		DeviceContext->PrevPtpReportAux2.Id = (UINT32)-1;
 		DeviceContext->ButtonDisabled = ReadSettingValue(L"ButtonDisabled", 0) ? TRUE : FALSE;
+		DeviceContext->ClickPressureThreshold = ReadSettingValue(L"ClickPressureThreshold", 0xffffffff);
 		DeviceContext->StopPressure = ReadSettingValue(L"StopPressure", 0);
 		DeviceContext->StopSize = ReadSettingValue(L"StopSize", 0xffffffff);
 		DeviceContext->IgnoreButtonFinger = ReadSettingValue(L"IgnoreButtonFinger", 1) ? TRUE : FALSE;
@@ -493,6 +494,20 @@ AmtPtpServiceTouchInputInterruptType5(
 		raw_n = (NumBytesTransferred - sizeof(struct TRACKPAD_REPORT_TYPE5)) / sizeof(struct TRACKPAD_FINGER_TYPE5);
 		if (raw_n >= PTP_MAX_CONTACT_POINTS) raw_n = PTP_MAX_CONTACT_POINTS;
 		PtpReport.ContactCount = (UCHAR)raw_n;
+
+		if (DeviceContext->ClickPressureThreshold != 0xffffffff) {
+			PtpReport.IsButtonClicked = 0;
+			for (i = 0; i < raw_n; i++) {
+				f = &mt_report->Fingers[i];
+				if ((f->State & 0x4) && f->Pressure >= DeviceContext->ClickPressureThreshold) {
+					PtpReport.IsButtonClicked = TRUE;
+					break;
+				}
+			}
+		}
+
+		if (DeviceContext->ButtonDisabled)
+			PtpReport.IsButtonClicked = 0;
 
 #ifdef INPUT_CONTENT_TRACE
 		TraceEvents(
