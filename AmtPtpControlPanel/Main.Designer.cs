@@ -38,6 +38,11 @@ namespace AmtPtpControlPanel
             this.ctlFirmLabel = new System.Windows.Forms.Label();
             this.ctlSilentClicking = new System.Windows.Forms.CheckBox();
             this.ctlMacOSClickOptions = new System.Windows.Forms.RadioButton();
+            this.ctlAdvancedFeedback = new System.Windows.Forms.CheckBox();
+            this.ctlFeedbackClickLabel = new System.Windows.Forms.Label();
+            this.ctlFeedbackClickValue = new System.Windows.Forms.TextBox();
+            this.ctlFeedbackReleaseLabel = new System.Windows.Forms.Label();
+            this.ctlFeedbackReleaseValue = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ctlMaximumFeedback = new System.Windows.Forms.RadioButton();
@@ -144,8 +149,56 @@ namespace AmtPtpControlPanel
             this.ctlMacOSClickOptions.UseVisualStyleBackColor = true;
             this.ctlMacOSClickOptions.CheckedChanged += new System.EventHandler(this.ctlClickOptions_CheckedChanged);
             // 
+            // ctlAdvancedFeedback
+            // 
+            this.ctlAdvancedFeedback.AutoSize = true;
+            this.ctlAdvancedFeedback.Location = new System.Drawing.Point(17, 166);
+            this.ctlAdvancedFeedback.Name = "ctlAdvancedFeedback";
+            this.ctlAdvancedFeedback.Size = new System.Drawing.Size(86, 21);
+            this.ctlAdvancedFeedback.TabIndex = 6;
+            this.ctlAdvancedFeedback.Text = "高级数值";
+            this.ctlAdvancedFeedback.UseVisualStyleBackColor = true;
+            this.ctlAdvancedFeedback.CheckedChanged += new System.EventHandler(this.ctlAdvancedFeedback_CheckedChanged);
+            // 
+            // ctlFeedbackClickLabel
+            // 
+            this.ctlFeedbackClickLabel.AutoSize = true;
+            this.ctlFeedbackClickLabel.Location = new System.Drawing.Point(111, 167);
+            this.ctlFeedbackClickLabel.Name = "ctlFeedbackClickLabel";
+            this.ctlFeedbackClickLabel.Size = new System.Drawing.Size(44, 17);
+            this.ctlFeedbackClickLabel.TabIndex = 7;
+            this.ctlFeedbackClickLabel.Text = "按下";
+            // 
+            // ctlFeedbackClickValue
+            // 
+            this.ctlFeedbackClickValue.Location = new System.Drawing.Point(151, 164);
+            this.ctlFeedbackClickValue.Name = "ctlFeedbackClickValue";
+            this.ctlFeedbackClickValue.Size = new System.Drawing.Size(72, 23);
+            this.ctlFeedbackClickValue.TabIndex = 8;
+            // 
+            // ctlFeedbackReleaseLabel
+            // 
+            this.ctlFeedbackReleaseLabel.AutoSize = true;
+            this.ctlFeedbackReleaseLabel.Location = new System.Drawing.Point(229, 167);
+            this.ctlFeedbackReleaseLabel.Name = "ctlFeedbackReleaseLabel";
+            this.ctlFeedbackReleaseLabel.Size = new System.Drawing.Size(44, 17);
+            this.ctlFeedbackReleaseLabel.TabIndex = 9;
+            this.ctlFeedbackReleaseLabel.Text = "释放";
+            // 
+            // ctlFeedbackReleaseValue
+            // 
+            this.ctlFeedbackReleaseValue.Location = new System.Drawing.Point(269, 164);
+            this.ctlFeedbackReleaseValue.Name = "ctlFeedbackReleaseValue";
+            this.ctlFeedbackReleaseValue.Size = new System.Drawing.Size(64, 23);
+            this.ctlFeedbackReleaseValue.TabIndex = 10;
+            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ctlFeedbackReleaseValue);
+            this.groupBox1.Controls.Add(this.ctlFeedbackReleaseLabel);
+            this.groupBox1.Controls.Add(this.ctlFeedbackClickValue);
+            this.groupBox1.Controls.Add(this.ctlFeedbackClickLabel);
+            this.groupBox1.Controls.Add(this.ctlAdvancedFeedback);
             this.groupBox1.Controls.Add(this.ctlLightLabel);
             this.groupBox1.Controls.Add(this.ctlMacOSClickOptions);
             this.groupBox1.Controls.Add(this.ctlSilentClicking);
@@ -408,6 +461,11 @@ namespace AmtPtpControlPanel
         private System.Windows.Forms.Label ctlFirmLabel;
         private System.Windows.Forms.CheckBox ctlSilentClicking;
         private System.Windows.Forms.RadioButton ctlMacOSClickOptions;
+        private System.Windows.Forms.CheckBox ctlAdvancedFeedback;
+        private System.Windows.Forms.Label ctlFeedbackClickLabel;
+        private System.Windows.Forms.TextBox ctlFeedbackClickValue;
+        private System.Windows.Forms.Label ctlFeedbackReleaseLabel;
+        private System.Windows.Forms.TextBox ctlFeedbackReleaseValue;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton ctlMaximumFeedback;
