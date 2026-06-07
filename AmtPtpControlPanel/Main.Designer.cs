@@ -40,9 +40,9 @@ namespace AmtPtpControlPanel
             this.ctlMacOSClickOptions = new System.Windows.Forms.RadioButton();
             this.ctlAdvancedFeedback = new System.Windows.Forms.CheckBox();
             this.ctlFeedbackClickLabel = new System.Windows.Forms.Label();
-            this.ctlFeedbackClickValue = new System.Windows.Forms.TextBox();
+            this.ctlFeedbackClickValue = new System.Windows.Forms.ComboBox();
             this.ctlFeedbackReleaseLabel = new System.Windows.Forms.Label();
-            this.ctlFeedbackReleaseValue = new System.Windows.Forms.TextBox();
+            this.ctlFeedbackReleaseValue = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ctlMaximumFeedback = new System.Windows.Forms.RadioButton();
@@ -83,7 +83,7 @@ namespace AmtPtpControlPanel
             // 
             // ctlApply
             // 
-            this.ctlApply.Location = new System.Drawing.Point(608, 537);
+            this.ctlApply.Location = new System.Drawing.Point(758, 537);
             this.ctlApply.Name = "ctlApply";
             this.ctlApply.Size = new System.Drawing.Size(195, 33);
             this.ctlApply.TabIndex = 0;
@@ -154,42 +154,44 @@ namespace AmtPtpControlPanel
             this.ctlAdvancedFeedback.AutoSize = true;
             this.ctlAdvancedFeedback.Location = new System.Drawing.Point(17, 166);
             this.ctlAdvancedFeedback.Name = "ctlAdvancedFeedback";
-            this.ctlAdvancedFeedback.Size = new System.Drawing.Size(86, 21);
+            this.ctlAdvancedFeedback.Size = new System.Drawing.Size(182, 21);
             this.ctlAdvancedFeedback.TabIndex = 6;
-            this.ctlAdvancedFeedback.Text = "高级数值";
+            this.ctlAdvancedFeedback.Text = "分别设置按下/释放反馈";
             this.ctlAdvancedFeedback.UseVisualStyleBackColor = true;
             this.ctlAdvancedFeedback.CheckedChanged += new System.EventHandler(this.ctlAdvancedFeedback_CheckedChanged);
             // 
             // ctlFeedbackClickLabel
             // 
             this.ctlFeedbackClickLabel.AutoSize = true;
-            this.ctlFeedbackClickLabel.Location = new System.Drawing.Point(111, 167);
+            this.ctlFeedbackClickLabel.Location = new System.Drawing.Point(205, 167);
             this.ctlFeedbackClickLabel.Name = "ctlFeedbackClickLabel";
-            this.ctlFeedbackClickLabel.Size = new System.Drawing.Size(44, 17);
+            this.ctlFeedbackClickLabel.Size = new System.Drawing.Size(68, 17);
             this.ctlFeedbackClickLabel.TabIndex = 7;
-            this.ctlFeedbackClickLabel.Text = "按下";
+            this.ctlFeedbackClickLabel.Text = "按下反馈";
             // 
             // ctlFeedbackClickValue
             // 
-            this.ctlFeedbackClickValue.Location = new System.Drawing.Point(151, 164);
+            this.ctlFeedbackClickValue.FormattingEnabled = true;
+            this.ctlFeedbackClickValue.Location = new System.Drawing.Point(272, 164);
             this.ctlFeedbackClickValue.Name = "ctlFeedbackClickValue";
-            this.ctlFeedbackClickValue.Size = new System.Drawing.Size(72, 23);
+            this.ctlFeedbackClickValue.Size = new System.Drawing.Size(72, 25);
             this.ctlFeedbackClickValue.TabIndex = 8;
             // 
             // ctlFeedbackReleaseLabel
             // 
             this.ctlFeedbackReleaseLabel.AutoSize = true;
-            this.ctlFeedbackReleaseLabel.Location = new System.Drawing.Point(229, 167);
+            this.ctlFeedbackReleaseLabel.Location = new System.Drawing.Point(350, 167);
             this.ctlFeedbackReleaseLabel.Name = "ctlFeedbackReleaseLabel";
-            this.ctlFeedbackReleaseLabel.Size = new System.Drawing.Size(44, 17);
+            this.ctlFeedbackReleaseLabel.Size = new System.Drawing.Size(68, 17);
             this.ctlFeedbackReleaseLabel.TabIndex = 9;
-            this.ctlFeedbackReleaseLabel.Text = "释放";
+            this.ctlFeedbackReleaseLabel.Text = "释放反馈";
             // 
             // ctlFeedbackReleaseValue
             // 
-            this.ctlFeedbackReleaseValue.Location = new System.Drawing.Point(269, 164);
+            this.ctlFeedbackReleaseValue.FormattingEnabled = true;
+            this.ctlFeedbackReleaseValue.Location = new System.Drawing.Point(417, 164);
             this.ctlFeedbackReleaseValue.Name = "ctlFeedbackReleaseValue";
-            this.ctlFeedbackReleaseValue.Size = new System.Drawing.Size(64, 23);
+            this.ctlFeedbackReleaseValue.Size = new System.Drawing.Size(72, 25);
             this.ctlFeedbackReleaseValue.TabIndex = 10;
             // 
             // groupBox1
@@ -207,7 +209,7 @@ namespace AmtPtpControlPanel
             this.groupBox1.Controls.Add(this.ctlFeedback);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(340, 194);
+            this.groupBox1.Size = new System.Drawing.Size(496, 194);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
@@ -215,7 +217,7 @@ namespace AmtPtpControlPanel
             // 
             this.groupBox2.Controls.Add(this.ctlMaximumFeedback);
             this.groupBox2.Controls.Add(this.ctlDisableFeedback);
-            this.groupBox2.Location = new System.Drawing.Point(358, 12);
+            this.groupBox2.Location = new System.Drawing.Point(508, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(445, 194);
             this.groupBox2.TabIndex = 2;
@@ -265,7 +267,7 @@ namespace AmtPtpControlPanel
             this.groupBox3.Controls.Add(this.ctlStopDoNothing);
             this.groupBox3.Location = new System.Drawing.Point(12, 212);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(791, 147);
+            this.groupBox3.Size = new System.Drawing.Size(941, 147);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "手指离开触控板时的防漂移过滤：";
@@ -351,7 +353,7 @@ namespace AmtPtpControlPanel
             this.groupBox4.Controls.Add(this.ctlIgnoreNearFingers);
             this.groupBox4.Location = new System.Drawing.Point(12, 365);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(791, 147);
+            this.groupBox4.Size = new System.Drawing.Size(941, 147);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "其他选项：";
@@ -401,7 +403,7 @@ namespace AmtPtpControlPanel
             this.ctlBatteryGroupBox.Controls.Add(this.ctlBatteryProgressBar);
             this.ctlBatteryGroupBox.Location = new System.Drawing.Point(13, 586);
             this.ctlBatteryGroupBox.Name = "ctlBatteryGroupBox";
-            this.ctlBatteryGroupBox.Size = new System.Drawing.Size(790, 75);
+            this.ctlBatteryGroupBox.Size = new System.Drawing.Size(940, 75);
             this.ctlBatteryGroupBox.TabIndex = 13;
             this.ctlBatteryGroupBox.TabStop = false;
             this.ctlBatteryGroupBox.Text = "电池（仅蓝牙）：";
@@ -420,7 +422,7 @@ namespace AmtPtpControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(815, 675);
+            this.ClientSize = new System.Drawing.Size(965, 675);
             this.Controls.Add(this.ctlBatteryGroupBox);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -463,9 +465,9 @@ namespace AmtPtpControlPanel
         private System.Windows.Forms.RadioButton ctlMacOSClickOptions;
         private System.Windows.Forms.CheckBox ctlAdvancedFeedback;
         private System.Windows.Forms.Label ctlFeedbackClickLabel;
-        private System.Windows.Forms.TextBox ctlFeedbackClickValue;
+        private System.Windows.Forms.ComboBox ctlFeedbackClickValue;
         private System.Windows.Forms.Label ctlFeedbackReleaseLabel;
-        private System.Windows.Forms.TextBox ctlFeedbackReleaseValue;
+        private System.Windows.Forms.ComboBox ctlFeedbackReleaseValue;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton ctlMaximumFeedback;

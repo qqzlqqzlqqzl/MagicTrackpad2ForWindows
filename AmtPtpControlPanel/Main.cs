@@ -21,9 +21,14 @@ namespace AmtPtpControlPanel
 {
     public partial class Main : Form
     {
+        private static readonly string[] FeedbackStrengthNames = { "轻", "标准", "强" };
+        private static readonly Int32[] FeedbackClickValues = { 0x040415, 0x060617, 0x08081e };
+        private static readonly Int32[] FeedbackReleaseValues = { 0x000010, 0x000014, 0x020218 };
+
         public Main()
         {
             InitializeComponent();
+            InitializeFeedbackStrengthControls();
         }
 
         private void ctlTouchpadSettings_Click(object sender, EventArgs e)
@@ -88,6 +93,16 @@ namespace AmtPtpControlPanel
             ctlLightLabel.Enabled = macEnabled && !advancedEnabled;
             ctlMediumLabel.Enabled = macEnabled && !advancedEnabled;
             ctlFirmLabel.Enabled = macEnabled && !advancedEnabled;
+        }
+
+        private void InitializeFeedbackStrengthControls()
+        {
+            ctlFeedbackClickValue.DropDownStyle = ComboBoxStyle.DropDownList;
+            ctlFeedbackReleaseValue.DropDownStyle = ComboBoxStyle.DropDownList;
+            ctlFeedbackClickValue.Items.AddRange(FeedbackStrengthNames);
+            ctlFeedbackReleaseValue.Items.AddRange(FeedbackStrengthNames);
+            ctlFeedbackClickValue.SelectedIndex = 1;
+            ctlFeedbackReleaseValue.SelectedIndex = 1;
         }
 
         private void ctlStop_CheckedChanged(object sender, EventArgs e)
@@ -185,8 +200,8 @@ namespace AmtPtpControlPanel
                 ctlAdvancedFeedback.Checked = !IsPresetFeedback(feedbackClick, feedbackRelease);
             }
 
-            ctlFeedbackClickValue.Text = FormatFeedbackValue(feedbackClick);
-            ctlFeedbackReleaseValue.Text = FormatFeedbackValue(feedbackRelease);
+            SelectFeedbackStrength(ctlFeedbackClickValue, FeedbackClickValues, feedbackClick);
+            SelectFeedbackStrength(ctlFeedbackReleaseValue, FeedbackReleaseValues, feedbackRelease);
             UpdateAdvancedFeedbackControls();
 
             if (stopPressure == -1 && stopSize == -1)
@@ -240,22 +255,13 @@ namespace AmtPtpControlPanel
                 buttonDisabled = 0;
                 if (ctlAdvancedFeedback.Checked)
                 {
-                    if (!TryParseFeedbackValue(ctlFeedbackClickValue.Text, out feedbackClick))
-                    {
-                        MessageBox.Show("按下反馈值必须是 0 到 0xFFFFFF 之间的十进制或十六进制数。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
-
-                    if (!TryParseFeedbackValue(ctlFeedbackReleaseValue.Text, out feedbackRelease))
-                    {
-                        MessageBox.Show("释放反馈值必须是 0 到 0xFFFFFF 之间的十进制或十六进制数。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
+                    feedbackClick = FeedbackClickValues[GetSelectedFeedbackIndex(ctlFeedbackClickValue)];
+                    feedbackRelease = FeedbackReleaseValues[GetSelectedFeedbackIndex(ctlFeedbackReleaseValue)];
                 }
                 else
                 {
-                    feedbackClick = ctlFeedback.Value == 0 ? 0x040415 : ctlFeedback.Value == 1 ? 0x060617 : 0x08081e;
-                    feedbackRelease = ctlFeedback.Value == 0 ? 0x000010 : ctlFeedback.Value == 1 ? 0x000014 : 0x020218;
+                    feedbackClick = FeedbackClickValues[ctlFeedback.Value];
+                    feedbackRelease = FeedbackReleaseValues[ctlFeedback.Value];
 
                     if (ctlSilentClicking.Checked)
                     {
@@ -326,56 +332,34 @@ namespace AmtPtpControlPanel
             return true;
         }
 
-        private static string FormatFeedbackValue(Int32 value)
+        private static int GetSelectedFeedbackIndex(ComboBox comboBox)
         {
-            return "0x" + ((UInt32)value).ToString("X6");
+            return comboBox.SelectedIndex < 0 ? 1 : comboBox.SelectedIndex;
         }
 
-        private static bool TryParseFeedbackValue(string text, out Int32 value)
+        private static void SelectFeedbackStrength(ComboBox comboBox, Int32[] presets, Int32 value)
         {
-            value = 0;
-
-            if (text == null)
-                return false;
-
-            string normalized = text.Trim();
-            if (normalized.Length == 0)
-                return false;
-
-            int numberBase = 10;
-            if (normalized.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
+            for (int i = 0; i < presets.Length; i++)
             {
-                numberBase = 16;
-                normalized = normalized.Substring(2);
+                if (value == presets[i] || ((value & 0xffff00) == 0 && (value & 0x0000ff) == (presets[i] & 0x0000ff)))
+                {
+                    comboBox.SelectedIndex = i;
+                    return;
+                }
             }
 
-            try
-            {
-                UInt32 parsed = Convert.ToUInt32(normalized, numberBase);
-                if (parsed > 0xffffff)
-                    return false;
-
-                value = (Int32)parsed;
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            comboBox.SelectedIndex = 1;
         }
 
         private static bool IsPresetFeedback(Int32 feedbackClick, Int32 feedbackRelease)
         {
-            Int32[] clickPresets = { 0x040415, 0x060617, 0x08081e };
-            Int32[] releasePresets = { 0x000010, 0x000014, 0x020218 };
-
-            for (int i = 0; i < clickPresets.Length; i++)
+            for (int i = 0; i < FeedbackClickValues.Length; i++)
             {
-                if (feedbackClick == clickPresets[i] && feedbackRelease == releasePresets[i])
+                if (feedbackClick == FeedbackClickValues[i] && feedbackRelease == FeedbackReleaseValues[i])
                     return true;
 
-                if ((feedbackClick & 0x0000ff) == (clickPresets[i] & 0x0000ff) &&
-                    (feedbackRelease & 0x0000ff) == (releasePresets[i] & 0x0000ff) &&
+                if ((feedbackClick & 0x0000ff) == (FeedbackClickValues[i] & 0x0000ff) &&
+                    (feedbackRelease & 0x0000ff) == (FeedbackReleaseValues[i] & 0x0000ff) &&
                     (feedbackClick & 0xffff00) == 0 &&
                     (feedbackRelease & 0xffff00) == 0)
                     return true;
