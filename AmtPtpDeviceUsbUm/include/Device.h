@@ -36,6 +36,7 @@ typedef struct _DEVICE_CONTEXT
 	BOOL						PrevPtpReportAuxAndSettingsInited;
 	UCHAR                       PrevIsButtonClicked;
 	BOOL                        ButtonDisabled;
+	ULONG                       ClickPressureThreshold;
 	ULONG                       StopPressure;
 	ULONG                       StopSize;
 	BOOL                        IgnoreButtonFinger;

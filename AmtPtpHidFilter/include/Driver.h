@@ -19,6 +19,7 @@ typedef struct _DRIVER_CONTEXT {
 	WDFDEVICE CDFirstDevice;
 	
 	BOOLEAN ButtonDisabled;
+	ULONG ClickPressureThreshold;
 	ULONG StopPressure;
 	ULONG StopSize;
 	BOOLEAN IgnoreButtonFinger;

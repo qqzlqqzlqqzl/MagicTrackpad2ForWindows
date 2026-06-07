@@ -45,6 +45,9 @@ namespace AmtPtpControlPanel
             this.ctlFeedbackReleaseValue = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ctlClickPressureThreshold = new System.Windows.Forms.CheckBox();
+            this.ctlClickPressureThresholdValue = new System.Windows.Forms.TextBox();
+            this.ctlClickPressureThresholdLabel = new System.Windows.Forms.Label();
             this.ctlMaximumFeedback = new System.Windows.Forms.RadioButton();
             this.ctlDisableFeedback = new System.Windows.Forms.RadioButton();
             this.ctlFocusHack = new System.Windows.Forms.TextBox();
@@ -148,9 +151,9 @@ namespace AmtPtpControlPanel
             this.ctlMacOSClickOptions.Text = "使用 macOS 点击选项：";
             this.ctlMacOSClickOptions.UseVisualStyleBackColor = true;
             this.ctlMacOSClickOptions.CheckedChanged += new System.EventHandler(this.ctlClickOptions_CheckedChanged);
-            // 
+            //
             // ctlAdvancedFeedback
-            // 
+            //
             this.ctlAdvancedFeedback.AutoSize = true;
             this.ctlAdvancedFeedback.Location = new System.Drawing.Point(17, 166);
             this.ctlAdvancedFeedback.Name = "ctlAdvancedFeedback";
@@ -159,41 +162,41 @@ namespace AmtPtpControlPanel
             this.ctlAdvancedFeedback.Text = "高级数值";
             this.ctlAdvancedFeedback.UseVisualStyleBackColor = true;
             this.ctlAdvancedFeedback.CheckedChanged += new System.EventHandler(this.ctlAdvancedFeedback_CheckedChanged);
-            // 
+            //
             // ctlFeedbackClickLabel
-            // 
+            //
             this.ctlFeedbackClickLabel.AutoSize = true;
             this.ctlFeedbackClickLabel.Location = new System.Drawing.Point(111, 167);
             this.ctlFeedbackClickLabel.Name = "ctlFeedbackClickLabel";
             this.ctlFeedbackClickLabel.Size = new System.Drawing.Size(44, 17);
             this.ctlFeedbackClickLabel.TabIndex = 7;
             this.ctlFeedbackClickLabel.Text = "按下";
-            // 
+            //
             // ctlFeedbackClickValue
-            // 
+            //
             this.ctlFeedbackClickValue.Location = new System.Drawing.Point(151, 164);
             this.ctlFeedbackClickValue.Name = "ctlFeedbackClickValue";
             this.ctlFeedbackClickValue.Size = new System.Drawing.Size(72, 23);
             this.ctlFeedbackClickValue.TabIndex = 8;
-            // 
+            //
             // ctlFeedbackReleaseLabel
-            // 
+            //
             this.ctlFeedbackReleaseLabel.AutoSize = true;
             this.ctlFeedbackReleaseLabel.Location = new System.Drawing.Point(229, 167);
             this.ctlFeedbackReleaseLabel.Name = "ctlFeedbackReleaseLabel";
             this.ctlFeedbackReleaseLabel.Size = new System.Drawing.Size(44, 17);
             this.ctlFeedbackReleaseLabel.TabIndex = 9;
             this.ctlFeedbackReleaseLabel.Text = "释放";
-            // 
+            //
             // ctlFeedbackReleaseValue
-            // 
+            //
             this.ctlFeedbackReleaseValue.Location = new System.Drawing.Point(269, 164);
             this.ctlFeedbackReleaseValue.Name = "ctlFeedbackReleaseValue";
             this.ctlFeedbackReleaseValue.Size = new System.Drawing.Size(64, 23);
             this.ctlFeedbackReleaseValue.TabIndex = 10;
-            // 
+            //
             // groupBox1
-            // 
+            //
             this.groupBox1.Controls.Add(this.ctlFeedbackReleaseValue);
             this.groupBox1.Controls.Add(this.ctlFeedbackReleaseLabel);
             this.groupBox1.Controls.Add(this.ctlFeedbackClickValue);
@@ -215,15 +218,47 @@ namespace AmtPtpControlPanel
             // 
             this.groupBox2.Controls.Add(this.ctlMaximumFeedback);
             this.groupBox2.Controls.Add(this.ctlDisableFeedback);
+            this.groupBox2.Controls.Add(this.ctlClickPressureThreshold);
+            this.groupBox2.Controls.Add(this.ctlClickPressureThresholdValue);
+            this.groupBox2.Controls.Add(this.ctlClickPressureThresholdLabel);
             this.groupBox2.Location = new System.Drawing.Point(358, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(445, 194);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "macOS 中不可用的点击选项：";
-            // 
+            //
+            // ctlClickPressureThreshold
+            //
+            this.ctlClickPressureThreshold.AutoSize = true;
+            this.ctlClickPressureThreshold.Location = new System.Drawing.Point(28, 135);
+            this.ctlClickPressureThreshold.Name = "ctlClickPressureThreshold";
+            this.ctlClickPressureThreshold.Size = new System.Drawing.Size(222, 21);
+            this.ctlClickPressureThreshold.TabIndex = 2;
+            this.ctlClickPressureThreshold.Text = "实验：用压力阈值触发点击";
+            this.ctlClickPressureThreshold.UseVisualStyleBackColor = true;
+            this.ctlClickPressureThreshold.CheckedChanged += new System.EventHandler(this.ctlClickPressureThreshold_CheckedChanged);
+            //
+            // ctlClickPressureThresholdValue
+            //
+            this.ctlClickPressureThresholdValue.Location = new System.Drawing.Point(291, 133);
+            this.ctlClickPressureThresholdValue.Name = "ctlClickPressureThresholdValue";
+            this.ctlClickPressureThresholdValue.Size = new System.Drawing.Size(51, 23);
+            this.ctlClickPressureThresholdValue.TabIndex = 3;
+            this.ctlClickPressureThresholdValue.Text = "128";
+            this.ctlClickPressureThresholdValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            //
+            // ctlClickPressureThresholdLabel
+            //
+            this.ctlClickPressureThresholdLabel.AutoSize = true;
+            this.ctlClickPressureThresholdLabel.Location = new System.Drawing.Point(348, 136);
+            this.ctlClickPressureThresholdLabel.Name = "ctlClickPressureThresholdLabel";
+            this.ctlClickPressureThresholdLabel.Size = new System.Drawing.Size(62, 17);
+            this.ctlClickPressureThresholdLabel.TabIndex = 4;
+            this.ctlClickPressureThresholdLabel.Text = "阈值 0-255";
+            //
             // ctlMaximumFeedback
-            // 
+            //
             this.ctlMaximumFeedback.AutoSize = true;
             this.ctlMaximumFeedback.Location = new System.Drawing.Point(28, 98);
             this.ctlMaximumFeedback.Name = "ctlMaximumFeedback";
@@ -468,6 +503,9 @@ namespace AmtPtpControlPanel
         private System.Windows.Forms.TextBox ctlFeedbackReleaseValue;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox ctlClickPressureThreshold;
+        private System.Windows.Forms.TextBox ctlClickPressureThresholdValue;
+        private System.Windows.Forms.Label ctlClickPressureThresholdLabel;
         private System.Windows.Forms.RadioButton ctlMaximumFeedback;
         private System.Windows.Forms.RadioButton ctlDisableFeedback;
         private System.Windows.Forms.TextBox ctlFocusHack;

@@ -172,14 +172,26 @@ PtpFilterInputParseMT2Report(
 	ptpOutputReport.IsButtonClicked = (UCHAR) mt_report->Button;
 	ptpOutputReport.ScanTime = (USHORT) timestamp * 10;
 
-	if (driverContext->ButtonDisabled)
-		ptpOutputReport.IsButtonClicked = 0;
-
 	// Report required content
 	// Touch
 	raw_n = (BufferLength - sizeof(TRACKPAD_REPORT_TYPE5)) / sizeof(TRACKPAD_FINGER_TYPE5);
 	if (raw_n >= PTP_MAX_CONTACT_POINTS) raw_n = PTP_MAX_CONTACT_POINTS;
 	ptpOutputReport.ContactCount = (UCHAR) raw_n;
+
+	if (driverContext->ClickPressureThreshold != 0xffffffff) {
+		ptpOutputReport.IsButtonClicked = 0;
+		for (size_t i = 0; i < raw_n; i++) {
+			f = &mt_report->Fingers[i];
+			if ((f->State & 0x4) && f->Pressure >= driverContext->ClickPressureThreshold) {
+				ptpOutputReport.IsButtonClicked = TRUE;
+				break;
+			}
+		}
+	}
+
+	if (driverContext->ButtonDisabled)
+		ptpOutputReport.IsButtonClicked = 0;
+
 	for (size_t i = 0; i < raw_n; i++) {
 		f = &mt_report->Fingers[i];
 
