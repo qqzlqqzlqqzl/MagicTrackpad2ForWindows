@@ -239,10 +239,10 @@ namespace AmtPtpControlPanel
             this.ctlDisableFeedback.AutoSize = true;
             this.ctlDisableFeedback.Location = new System.Drawing.Point(28, 61);
             this.ctlDisableFeedback.Name = "ctlDisableFeedback";
-            this.ctlDisableFeedback.Size = new System.Drawing.Size(267, 21);
+            this.ctlDisableFeedback.Size = new System.Drawing.Size(367, 21);
             this.ctlDisableFeedback.TabIndex = 0;
             this.ctlDisableFeedback.TabStop = true;
-            this.ctlDisableFeedback.Text = "完全禁用触觉反馈和用力点按按钮";
+            this.ctlDisableFeedback.Text = "禁用触觉反馈和按钮点击上报（不是调节点击力度）";
             this.ctlDisableFeedback.UseVisualStyleBackColor = true;
             this.ctlDisableFeedback.CheckedChanged += new System.EventHandler(this.ctlClickOptions_CheckedChanged);
             // 
