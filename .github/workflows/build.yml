@@ -64,8 +64,8 @@ jobs:
           SIGNTOOL="$(find packages "/c/Program Files (x86)/Windows Kits/10/bin" -iname signtool.exe | sort | tail -n 1)"
           if [ -z "$INF2CAT" ]; then echo "Inf2Cat.exe not found"; exit 1; fi
           if [ -z "$SIGNTOOL" ]; then echo "signtool.exe not found"; exit 1; fi
-          "$INF2CAT" /driver:"$(cygpath -w package_x64)" /os:10_X64
-          "$INF2CAT" /driver:"$(cygpath -w package_arm64)" /os:10_ARM64
+          "$INF2CAT" /driver:"$(cygpath -w package_x64)" /os:10_RS4_X64
+          "$INF2CAT" /driver:"$(cygpath -w package_arm64)" /os:10_RS4_ARM64
           "$SIGNTOOL" sign /fd SHA256 /a "$(cygpath -w package_x64/AmtPtpDevice.cat)"
           "$SIGNTOOL" sign /fd SHA256 /a "$(cygpath -w package_arm64/AmtPtpDevice.cat)"
           echo -e '.OPTION EXPLICIT\n.Set CabinetFileCountThreshold=0\n.Set FolderFileCountThreshold=0\n.Set FolderSizeThreshold=0\n.Set MaxCabinetSize=0\n.Set MaxDiskFileCount=0\n.Set MaxDiskSize=0\n.Set CompressionType=MSZIP\n.Set Cabinet=on\n.Set Compress=on\n.Set CabinetNameTemplate=drivers_x64.cab\n.Set DestinationDir=AMD64\npackage_x64\\AmtPtpDevice.inf\tAmtPtpDevice.inf\npackage_x64\\AmtPtpDevice.cat\npackage_x64\\AmtPtpDeviceUsbUm.dll\npackage_x64\\AmtPtpHidFilter.sys\nAmtPtpDeviceUsbUm\\build\\AmtPtpDeviceUsbUm\\x64\\Release\\AmtPtpDeviceUsbUm.pdb\nAmtPtpHidFilter\\build\\AmtPtpHidFilter\\x64\\Release\\AmtPtpHidFilter.pdb\n' > x64.ddf
