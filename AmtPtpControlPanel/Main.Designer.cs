@@ -127,9 +127,9 @@ namespace AmtPtpControlPanel
             this.ctlSilentClicking.AutoSize = true;
             this.ctlSilentClicking.Location = new System.Drawing.Point(112, 68);
             this.ctlSilentClicking.Name = "ctlSilentClicking";
-            this.ctlSilentClicking.Size = new System.Drawing.Size(86, 21);
+            this.ctlSilentClicking.Size = new System.Drawing.Size(243, 21);
             this.ctlSilentClicking.TabIndex = 1;
-            this.ctlSilentClicking.Text = "静音点击";
+            this.ctlSilentClicking.Text = "静音点击（降低反馈声，不改变触发力度）";
             this.ctlSilentClicking.UseVisualStyleBackColor = true;
             // 
             // ctlMacOSClickOptions
