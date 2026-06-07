@@ -308,9 +308,9 @@ namespace AmtPtpControlPanel
             this.ctlPalmRejection.AutoSize = true;
             this.ctlPalmRejection.Location = new System.Drawing.Point(17, 106);
             this.ctlPalmRejection.Name = "ctlPalmRejection";
-            this.ctlPalmRejection.Size = new System.Drawing.Size(116, 21);
+            this.ctlPalmRejection.Size = new System.Drawing.Size(220, 21);
             this.ctlPalmRejection.TabIndex = 2;
-            this.ctlPalmRejection.Text = "手掌误触抑制";
+            this.ctlPalmRejection.Text = "手掌误触抑制（过滤疑似掌根输入）";
             this.ctlPalmRejection.UseVisualStyleBackColor = true;
             // 
             // ctlIgnoreButtonFinger
@@ -319,7 +319,7 @@ namespace AmtPtpControlPanel
             this.ctlIgnoreButtonFinger.Name = "ctlIgnoreButtonFinger";
             this.ctlIgnoreButtonFinger.Size = new System.Drawing.Size(755, 41);
             this.ctlIgnoreButtonFinger.TabIndex = 1;
-            this.ctlIgnoreButtonFinger.Text = "忽略用于按下用力点按按钮的手指输入（例如拖动时用拇指点击、食指移动指针）";
+            this.ctlIgnoreButtonFinger.Text = "点击时忽略负责按下的手指（例如拇指按下、食指移动指针时更适合拖动）";
             this.ctlIgnoreButtonFinger.UseVisualStyleBackColor = true;
             // 
             // ctlIgnoreNearFingers
@@ -327,9 +327,9 @@ namespace AmtPtpControlPanel
             this.ctlIgnoreNearFingers.AutoSize = true;
             this.ctlIgnoreNearFingers.Location = new System.Drawing.Point(17, 32);
             this.ctlIgnoreNearFingers.Name = "ctlIgnoreNearFingers";
-            this.ctlIgnoreNearFingers.Size = new System.Drawing.Size(252, 21);
+            this.ctlIgnoreNearFingers.Size = new System.Drawing.Size(329, 21);
             this.ctlIgnoreNearFingers.TabIndex = 0;
-            this.ctlIgnoreNearFingers.Text = "忽略未接触触控板表面的手指输入";
+            this.ctlIgnoreNearFingers.Text = "忽略悬浮/近场手指输入（未真正接触表面）";
             this.ctlIgnoreNearFingers.UseVisualStyleBackColor = true;
             // 
             // ctlBatteryProgressBar
