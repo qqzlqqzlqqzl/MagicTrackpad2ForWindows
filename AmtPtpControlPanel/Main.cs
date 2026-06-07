@@ -276,7 +276,7 @@ namespace AmtPtpControlPanel
 
                 if (!Int32.TryParse(ctlStopPressureValue.Text, out stopPressure) || stopPressure < 0)
                 {
-                    MessageBox.Show("压力必须大于或等于 0。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("离手防漂移压力阈值必须大于或等于 0。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
