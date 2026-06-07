@@ -238,7 +238,7 @@ namespace AmtPtpControlPanel
 
                 if (!Int32.TryParse(ctlStopSizeValue.Text, out stopSize) || stopSize < 0)
                 {
-                    MessageBox.Show("触摸面积必须大于或等于 0。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("离手防漂移触摸面积阈值必须大于或等于 0。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }

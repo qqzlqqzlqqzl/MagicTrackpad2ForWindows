@@ -215,7 +215,7 @@ namespace AmtPtpControlPanel
             this.groupBox3.Size = new System.Drawing.Size(791, 147);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "手指离开触控板时：";
+            this.groupBox3.Text = "手指离开触控板时的防漂移过滤：";
             // 
             // ctlStopSizeLabel
             // 
@@ -260,10 +260,10 @@ namespace AmtPtpControlPanel
             this.ctlStopSize.AutoSize = true;
             this.ctlStopSize.Location = new System.Drawing.Point(17, 106);
             this.ctlStopSize.Name = "ctlStopSize";
-            this.ctlStopSize.Size = new System.Drawing.Size(267, 21);
+            this.ctlStopSize.Size = new System.Drawing.Size(341, 21);
             this.ctlStopSize.TabIndex = 4;
             this.ctlStopSize.TabStop = true;
-            this.ctlStopSize.Text = "触摸面积小于或等于此值时停止指针";
+            this.ctlStopSize.Text = "离手时触摸面积小于或等于此值则停止指针";
             this.ctlStopSize.UseVisualStyleBackColor = true;
             this.ctlStopSize.CheckedChanged += new System.EventHandler(this.ctlStop_CheckedChanged);
             // 
