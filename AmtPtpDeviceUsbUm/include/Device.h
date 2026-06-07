@@ -37,6 +37,8 @@ typedef struct _DEVICE_CONTEXT
 	UCHAR                       PrevIsButtonClicked;
 	BOOL                        ButtonDisabled;
 	ULONG                       ClickPressureThreshold;
+	ULONG                       ClickPressPressureThreshold;
+	ULONG                       ClickReleasePressureThreshold;
 	ULONG                       StopPressure;
 	ULONG                       StopSize;
 	BOOL                        IgnoreButtonFinger;

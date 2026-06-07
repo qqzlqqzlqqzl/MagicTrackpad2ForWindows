@@ -132,6 +132,8 @@ PtpFilterReadSettings(
 {
 	DriverContext->ButtonDisabled = PtpFilterReadSettingValue(L"ButtonDisabled", 0) ? TRUE : FALSE;
 	DriverContext->ClickPressureThreshold = PtpFilterReadSettingValue(L"ClickPressureThreshold", 0xffffffff);
+	DriverContext->ClickPressPressureThreshold = PtpFilterReadSettingValue(L"ClickPressPressureThreshold", 0xffffffff);
+	DriverContext->ClickReleasePressureThreshold = PtpFilterReadSettingValue(L"ClickReleasePressureThreshold", 0xffffffff);
 	DriverContext->StopPressure = PtpFilterReadSettingValue(L"StopPressure", 0);
 	DriverContext->StopSize = PtpFilterReadSettingValue(L"StopSize", 0xffffffff);
 	DriverContext->IgnoreButtonFinger = PtpFilterReadSettingValue(L"IgnoreButtonFinger", 1) ? TRUE : FALSE;

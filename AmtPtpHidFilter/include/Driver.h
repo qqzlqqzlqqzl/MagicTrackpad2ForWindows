@@ -20,6 +20,8 @@ typedef struct _DRIVER_CONTEXT {
 	
 	BOOLEAN ButtonDisabled;
 	ULONG ClickPressureThreshold;
+	ULONG ClickPressPressureThreshold;
+	ULONG ClickReleasePressureThreshold;
 	ULONG StopPressure;
 	ULONG StopSize;
 	BOOLEAN IgnoreButtonFinger;
