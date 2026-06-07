@@ -313,10 +313,10 @@ namespace AmtPtpControlPanel
             this.ctlStopSize.AutoSize = true;
             this.ctlStopSize.Location = new System.Drawing.Point(17, 106);
             this.ctlStopSize.Name = "ctlStopSize";
-            this.ctlStopSize.Size = new System.Drawing.Size(267, 21);
+            this.ctlStopSize.Size = new System.Drawing.Size(341, 21);
             this.ctlStopSize.TabIndex = 4;
             this.ctlStopSize.TabStop = true;
-            this.ctlStopSize.Text = "触摸面积小于或等于此值时停止指针";
+            this.ctlStopSize.Text = "离手时触摸面积小于或等于此值则停止指针";
             this.ctlStopSize.UseVisualStyleBackColor = true;
             this.ctlStopSize.CheckedChanged += new System.EventHandler(this.ctlStop_CheckedChanged);
             // 
