@@ -38,6 +38,11 @@ namespace AmtPtpControlPanel
             this.ctlFirmLabel = new System.Windows.Forms.Label();
             this.ctlSilentClicking = new System.Windows.Forms.CheckBox();
             this.ctlMacOSClickOptions = new System.Windows.Forms.RadioButton();
+            this.ctlAdvancedFeedback = new System.Windows.Forms.CheckBox();
+            this.ctlFeedbackClickLabel = new System.Windows.Forms.Label();
+            this.ctlFeedbackClickValue = new System.Windows.Forms.TextBox();
+            this.ctlFeedbackReleaseLabel = new System.Windows.Forms.Label();
+            this.ctlFeedbackReleaseValue = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ctlClickPressureThreshold = new System.Windows.Forms.CheckBox();
@@ -130,9 +135,9 @@ namespace AmtPtpControlPanel
             this.ctlSilentClicking.AutoSize = true;
             this.ctlSilentClicking.Location = new System.Drawing.Point(112, 68);
             this.ctlSilentClicking.Name = "ctlSilentClicking";
-            this.ctlSilentClicking.Size = new System.Drawing.Size(86, 21);
+            this.ctlSilentClicking.Size = new System.Drawing.Size(243, 21);
             this.ctlSilentClicking.TabIndex = 1;
-            this.ctlSilentClicking.Text = "静音点击";
+            this.ctlSilentClicking.Text = "静音点击（降低反馈声，不改变触发力度）";
             this.ctlSilentClicking.UseVisualStyleBackColor = true;
             // 
             // ctlMacOSClickOptions
@@ -146,9 +151,57 @@ namespace AmtPtpControlPanel
             this.ctlMacOSClickOptions.Text = "使用 macOS 点击选项：";
             this.ctlMacOSClickOptions.UseVisualStyleBackColor = true;
             this.ctlMacOSClickOptions.CheckedChanged += new System.EventHandler(this.ctlClickOptions_CheckedChanged);
-            // 
+            //
+            // ctlAdvancedFeedback
+            //
+            this.ctlAdvancedFeedback.AutoSize = true;
+            this.ctlAdvancedFeedback.Location = new System.Drawing.Point(17, 166);
+            this.ctlAdvancedFeedback.Name = "ctlAdvancedFeedback";
+            this.ctlAdvancedFeedback.Size = new System.Drawing.Size(86, 21);
+            this.ctlAdvancedFeedback.TabIndex = 6;
+            this.ctlAdvancedFeedback.Text = "高级数值";
+            this.ctlAdvancedFeedback.UseVisualStyleBackColor = true;
+            this.ctlAdvancedFeedback.CheckedChanged += new System.EventHandler(this.ctlAdvancedFeedback_CheckedChanged);
+            //
+            // ctlFeedbackClickLabel
+            //
+            this.ctlFeedbackClickLabel.AutoSize = true;
+            this.ctlFeedbackClickLabel.Location = new System.Drawing.Point(111, 167);
+            this.ctlFeedbackClickLabel.Name = "ctlFeedbackClickLabel";
+            this.ctlFeedbackClickLabel.Size = new System.Drawing.Size(44, 17);
+            this.ctlFeedbackClickLabel.TabIndex = 7;
+            this.ctlFeedbackClickLabel.Text = "按下";
+            //
+            // ctlFeedbackClickValue
+            //
+            this.ctlFeedbackClickValue.Location = new System.Drawing.Point(151, 164);
+            this.ctlFeedbackClickValue.Name = "ctlFeedbackClickValue";
+            this.ctlFeedbackClickValue.Size = new System.Drawing.Size(72, 23);
+            this.ctlFeedbackClickValue.TabIndex = 8;
+            //
+            // ctlFeedbackReleaseLabel
+            //
+            this.ctlFeedbackReleaseLabel.AutoSize = true;
+            this.ctlFeedbackReleaseLabel.Location = new System.Drawing.Point(229, 167);
+            this.ctlFeedbackReleaseLabel.Name = "ctlFeedbackReleaseLabel";
+            this.ctlFeedbackReleaseLabel.Size = new System.Drawing.Size(44, 17);
+            this.ctlFeedbackReleaseLabel.TabIndex = 9;
+            this.ctlFeedbackReleaseLabel.Text = "释放";
+            //
+            // ctlFeedbackReleaseValue
+            //
+            this.ctlFeedbackReleaseValue.Location = new System.Drawing.Point(269, 164);
+            this.ctlFeedbackReleaseValue.Name = "ctlFeedbackReleaseValue";
+            this.ctlFeedbackReleaseValue.Size = new System.Drawing.Size(64, 23);
+            this.ctlFeedbackReleaseValue.TabIndex = 10;
+            //
             // groupBox1
-            // 
+            //
+            this.groupBox1.Controls.Add(this.ctlFeedbackReleaseValue);
+            this.groupBox1.Controls.Add(this.ctlFeedbackReleaseLabel);
+            this.groupBox1.Controls.Add(this.ctlFeedbackClickValue);
+            this.groupBox1.Controls.Add(this.ctlFeedbackClickLabel);
+            this.groupBox1.Controls.Add(this.ctlAdvancedFeedback);
             this.groupBox1.Controls.Add(this.ctlLightLabel);
             this.groupBox1.Controls.Add(this.ctlMacOSClickOptions);
             this.groupBox1.Controls.Add(this.ctlSilentClicking);
@@ -221,10 +274,10 @@ namespace AmtPtpControlPanel
             this.ctlDisableFeedback.AutoSize = true;
             this.ctlDisableFeedback.Location = new System.Drawing.Point(28, 61);
             this.ctlDisableFeedback.Name = "ctlDisableFeedback";
-            this.ctlDisableFeedback.Size = new System.Drawing.Size(267, 21);
+            this.ctlDisableFeedback.Size = new System.Drawing.Size(367, 21);
             this.ctlDisableFeedback.TabIndex = 0;
             this.ctlDisableFeedback.TabStop = true;
-            this.ctlDisableFeedback.Text = "完全禁用触觉反馈和用力点按按钮";
+            this.ctlDisableFeedback.Text = "禁用触觉反馈和按钮点击上报（不是调节点击力度）";
             this.ctlDisableFeedback.UseVisualStyleBackColor = true;
             this.ctlDisableFeedback.CheckedChanged += new System.EventHandler(this.ctlClickOptions_CheckedChanged);
             // 
@@ -250,7 +303,7 @@ namespace AmtPtpControlPanel
             this.groupBox3.Size = new System.Drawing.Size(791, 147);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "手指离开触控板时：";
+            this.groupBox3.Text = "手指离开触控板时的防漂移过滤：";
             // 
             // ctlStopSizeLabel
             // 
@@ -295,10 +348,10 @@ namespace AmtPtpControlPanel
             this.ctlStopSize.AutoSize = true;
             this.ctlStopSize.Location = new System.Drawing.Point(17, 106);
             this.ctlStopSize.Name = "ctlStopSize";
-            this.ctlStopSize.Size = new System.Drawing.Size(267, 21);
+            this.ctlStopSize.Size = new System.Drawing.Size(341, 21);
             this.ctlStopSize.TabIndex = 4;
             this.ctlStopSize.TabStop = true;
-            this.ctlStopSize.Text = "触摸面积小于或等于此值时停止指针";
+            this.ctlStopSize.Text = "离手时触摸面积小于或等于此值则停止指针";
             this.ctlStopSize.UseVisualStyleBackColor = true;
             this.ctlStopSize.CheckedChanged += new System.EventHandler(this.ctlStop_CheckedChanged);
             // 
@@ -307,10 +360,10 @@ namespace AmtPtpControlPanel
             this.ctlStopPressure.AutoSize = true;
             this.ctlStopPressure.Location = new System.Drawing.Point(17, 69);
             this.ctlStopPressure.Name = "ctlStopPressure";
-            this.ctlStopPressure.Size = new System.Drawing.Size(228, 21);
+            this.ctlStopPressure.Size = new System.Drawing.Size(311, 21);
             this.ctlStopPressure.TabIndex = 1;
             this.ctlStopPressure.TabStop = true;
-            this.ctlStopPressure.Text = "压力小于或等于此值时停止指针";
+            this.ctlStopPressure.Text = "离手时压力小于或等于此值则停止指针";
             this.ctlStopPressure.UseVisualStyleBackColor = true;
             this.ctlStopPressure.CheckedChanged += new System.EventHandler(this.ctlStop_CheckedChanged);
             // 
@@ -343,9 +396,9 @@ namespace AmtPtpControlPanel
             this.ctlPalmRejection.AutoSize = true;
             this.ctlPalmRejection.Location = new System.Drawing.Point(17, 106);
             this.ctlPalmRejection.Name = "ctlPalmRejection";
-            this.ctlPalmRejection.Size = new System.Drawing.Size(116, 21);
+            this.ctlPalmRejection.Size = new System.Drawing.Size(220, 21);
             this.ctlPalmRejection.TabIndex = 2;
-            this.ctlPalmRejection.Text = "手掌误触抑制";
+            this.ctlPalmRejection.Text = "手掌误触抑制（过滤疑似掌根输入）";
             this.ctlPalmRejection.UseVisualStyleBackColor = true;
             // 
             // ctlIgnoreButtonFinger
@@ -354,7 +407,7 @@ namespace AmtPtpControlPanel
             this.ctlIgnoreButtonFinger.Name = "ctlIgnoreButtonFinger";
             this.ctlIgnoreButtonFinger.Size = new System.Drawing.Size(755, 41);
             this.ctlIgnoreButtonFinger.TabIndex = 1;
-            this.ctlIgnoreButtonFinger.Text = "忽略用于按下用力点按按钮的手指输入（例如拖动时用拇指点击、食指移动指针）";
+            this.ctlIgnoreButtonFinger.Text = "点击时忽略负责按下的手指（例如拇指按下、食指移动指针时更适合拖动）";
             this.ctlIgnoreButtonFinger.UseVisualStyleBackColor = true;
             // 
             // ctlIgnoreNearFingers
@@ -362,9 +415,9 @@ namespace AmtPtpControlPanel
             this.ctlIgnoreNearFingers.AutoSize = true;
             this.ctlIgnoreNearFingers.Location = new System.Drawing.Point(17, 32);
             this.ctlIgnoreNearFingers.Name = "ctlIgnoreNearFingers";
-            this.ctlIgnoreNearFingers.Size = new System.Drawing.Size(252, 21);
+            this.ctlIgnoreNearFingers.Size = new System.Drawing.Size(329, 21);
             this.ctlIgnoreNearFingers.TabIndex = 0;
-            this.ctlIgnoreNearFingers.Text = "忽略未接触触控板表面的手指输入";
+            this.ctlIgnoreNearFingers.Text = "忽略悬浮/近场手指输入（未真正接触表面）";
             this.ctlIgnoreNearFingers.UseVisualStyleBackColor = true;
             // 
             // ctlBatteryProgressBar
@@ -443,6 +496,11 @@ namespace AmtPtpControlPanel
         private System.Windows.Forms.Label ctlFirmLabel;
         private System.Windows.Forms.CheckBox ctlSilentClicking;
         private System.Windows.Forms.RadioButton ctlMacOSClickOptions;
+        private System.Windows.Forms.CheckBox ctlAdvancedFeedback;
+        private System.Windows.Forms.Label ctlFeedbackClickLabel;
+        private System.Windows.Forms.TextBox ctlFeedbackClickValue;
+        private System.Windows.Forms.Label ctlFeedbackReleaseLabel;
+        private System.Windows.Forms.TextBox ctlFeedbackReleaseValue;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox ctlClickPressureThreshold;

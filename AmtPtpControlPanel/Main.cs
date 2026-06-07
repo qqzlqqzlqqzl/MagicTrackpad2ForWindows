@@ -63,6 +63,31 @@ namespace AmtPtpControlPanel
             bool macEnabled = ctlMacOSClickOptions.Checked;
             foreach (var ctl in macCtls)
                 ctl.Enabled = macEnabled;
+
+            UpdateAdvancedFeedbackControls();
+        }
+
+        private void ctlAdvancedFeedback_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateAdvancedFeedbackControls();
+        }
+
+        private void UpdateAdvancedFeedbackControls()
+        {
+            bool macEnabled = ctlMacOSClickOptions.Checked;
+            bool advancedEnabled = macEnabled && ctlAdvancedFeedback.Checked;
+
+            ctlAdvancedFeedback.Enabled = macEnabled;
+            ctlFeedbackClickLabel.Enabled = advancedEnabled;
+            ctlFeedbackClickValue.Enabled = advancedEnabled;
+            ctlFeedbackReleaseLabel.Enabled = advancedEnabled;
+            ctlFeedbackReleaseValue.Enabled = advancedEnabled;
+
+            ctlSilentClicking.Enabled = macEnabled && !advancedEnabled;
+            ctlFeedback.Enabled = macEnabled && !advancedEnabled;
+            ctlLightLabel.Enabled = macEnabled && !advancedEnabled;
+            ctlMediumLabel.Enabled = macEnabled && !advancedEnabled;
+            ctlFirmLabel.Enabled = macEnabled && !advancedEnabled;
         }
 
         private void ctlStop_CheckedChanged(object sender, EventArgs e)
@@ -164,7 +189,13 @@ namespace AmtPtpControlPanel
                     ctlFeedback.Value = 0;
                 else if ((feedbackClick & 0x0000ff) == 0x1e && (feedbackRelease & 0x0000ff) == 0x18)
                     ctlFeedback.Value = 2;
+
+                ctlAdvancedFeedback.Checked = !IsPresetFeedback(feedbackClick, feedbackRelease);
             }
+
+            ctlFeedbackClickValue.Text = FormatFeedbackValue(feedbackClick);
+            ctlFeedbackReleaseValue.Text = FormatFeedbackValue(feedbackRelease);
+            UpdateAdvancedFeedbackControls();
 
             if (stopPressure == -1 && stopSize == -1)
                 ctlStopDoNothing.Checked = true;
@@ -223,13 +254,30 @@ namespace AmtPtpControlPanel
             else
             {
                 buttonDisabled = 0;
-                feedbackClick = ctlFeedback.Value == 0 ? 0x040415 : ctlFeedback.Value == 1 ? 0x060617 : 0x08081e;
-                feedbackRelease = ctlFeedback.Value == 0 ? 0x000010 : ctlFeedback.Value == 1 ? 0x000014 : 0x020218;
-
-                if (ctlSilentClicking.Checked)
+                if (ctlAdvancedFeedback.Checked)
                 {
-                    feedbackClick = feedbackClick & 0x0000ff;
-                    feedbackRelease = feedbackRelease & 0x0000ff;
+                    if (!TryParseFeedbackValue(ctlFeedbackClickValue.Text, out feedbackClick))
+                    {
+                        MessageBox.Show("按下反馈值必须是 0 到 0xFFFFFF 之间的十进制或十六进制数。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+
+                    if (!TryParseFeedbackValue(ctlFeedbackReleaseValue.Text, out feedbackRelease))
+                    {
+                        MessageBox.Show("释放反馈值必须是 0 到 0xFFFFFF 之间的十进制或十六进制数。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+                else
+                {
+                    feedbackClick = ctlFeedback.Value == 0 ? 0x040415 : ctlFeedback.Value == 1 ? 0x060617 : 0x08081e;
+                    feedbackRelease = ctlFeedback.Value == 0 ? 0x000010 : ctlFeedback.Value == 1 ? 0x000014 : 0x020218;
+
+                    if (ctlSilentClicking.Checked)
+                    {
+                        feedbackClick = feedbackClick & 0x0000ff;
+                        feedbackRelease = feedbackRelease & 0x0000ff;
+                    }
                 }
             }
 
@@ -244,7 +292,7 @@ namespace AmtPtpControlPanel
 
                 if (!Int32.TryParse(ctlStopPressureValue.Text, out stopPressure) || stopPressure < 0)
                 {
-                    MessageBox.Show("压力必须大于或等于 0。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("离手防漂移压力阈值必须大于或等于 0。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -254,7 +302,7 @@ namespace AmtPtpControlPanel
 
                 if (!Int32.TryParse(ctlStopSizeValue.Text, out stopSize) || stopSize < 0)
                 {
-                    MessageBox.Show("触摸面积必须大于或等于 0。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("离手防漂移触摸面积阈值必须大于或等于 0。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -304,6 +352,64 @@ namespace AmtPtpControlPanel
             }
 
             return true;
+        }
+
+        private static string FormatFeedbackValue(Int32 value)
+        {
+            return "0x" + ((UInt32)value).ToString("X6");
+        }
+
+        private static bool TryParseFeedbackValue(string text, out Int32 value)
+        {
+            value = 0;
+
+            if (text == null)
+                return false;
+
+            string normalized = text.Trim();
+            if (normalized.Length == 0)
+                return false;
+
+            int numberBase = 10;
+            if (normalized.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
+            {
+                numberBase = 16;
+                normalized = normalized.Substring(2);
+            }
+
+            try
+            {
+                UInt32 parsed = Convert.ToUInt32(normalized, numberBase);
+                if (parsed > 0xffffff)
+                    return false;
+
+                value = (Int32)parsed;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private static bool IsPresetFeedback(Int32 feedbackClick, Int32 feedbackRelease)
+        {
+            Int32[] clickPresets = { 0x040415, 0x060617, 0x08081e };
+            Int32[] releasePresets = { 0x000010, 0x000014, 0x020218 };
+
+            for (int i = 0; i < clickPresets.Length; i++)
+            {
+                if (feedbackClick == clickPresets[i] && feedbackRelease == releasePresets[i])
+                    return true;
+
+                if ((feedbackClick & 0x0000ff) == (clickPresets[i] & 0x0000ff) &&
+                    (feedbackRelease & 0x0000ff) == (releasePresets[i] & 0x0000ff) &&
+                    (feedbackClick & 0xffff00) == 0 &&
+                    (feedbackRelease & 0xffff00) == 0)
+                    return true;
+            }
+
+            return false;
         }
     }
 
