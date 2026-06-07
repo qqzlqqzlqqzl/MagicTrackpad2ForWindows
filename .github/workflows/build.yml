@@ -64,6 +64,7 @@ jobs:
           SIGNTOOL="$(find packages "/c/Program Files (x86)/Windows Kits/10/bin" -iname signtool.exe | sort | tail -n 1)"
           if [ -z "$INF2CAT" ]; then echo "Inf2Cat.exe not found"; exit 1; fi
           if [ -z "$SIGNTOOL" ]; then echo "signtool.exe not found"; exit 1; fi
+          export MSYS2_ARG_CONV_EXCL='*'
           "$INF2CAT" /driver:"$(cygpath -w package_x64)" /os:10_RS4_X64
           "$INF2CAT" /driver:"$(cygpath -w package_arm64)" /os:10_RS4_ARM64
           "$SIGNTOOL" sign /fd SHA256 /a "$(cygpath -w package_x64/AmtPtpDevice.cat)"
